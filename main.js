@@ -5,10 +5,10 @@ import './style.css'
 import * as sdk from "@d-id/client-sdk"
 
 // 2. Paste the `data-agent-id' in the 'agentId' variable
-let agentId = ""
+let agentId = "agt_twx-LK32"
 
 // 3. Paste the 'data-client-key' in the 'auth.clientKey' variable
-let auth = { type: 'key', clientKey: "" };
+let auth = { type: 'key', clientKey: "Z29vZ2xlLW9hdXRoMnwxMDI5MDQ4NjI1NzIzMzU1MjQyOTM6WEFnN2Z5SUVPN3dTeU5yREEyVXg3" };
 
 // HTML Variables declaration
 let videoElement = document.querySelector("#videoElement")
@@ -192,7 +192,7 @@ speakButton.addEventListener('click', () => speak())
 reconnectButton.addEventListener('click', () => reconnect())
 speechButton.addEventListener('click', () => toggleStartStop())
 
-// Focus on input and button disabling when loading
+// Focus on input and button disablinßg when loading
 window.addEventListener('load', () => {
     textArea.focus(),
         chatButton.setAttribute("disabled", true)
