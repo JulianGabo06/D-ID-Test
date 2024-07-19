@@ -1,4 +1,5 @@
-var recognizing;
+let recognizing;
+let recognition;
 
 if (navigator.userAgent.includes("Firefox")) {
   recognition = new SpeechRecognition();
