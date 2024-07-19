@@ -21,11 +21,11 @@ let langSelect = document.querySelector("#langSelect");
 let speechButton = document.querySelector("#speechButton");
 let answers = document.querySelector("#answers");
 let connectionLabel = document.querySelector("#connectionLabel");
-let chatButton = document.querySelector("#chatButton");
-let speakButton = document.querySelector("#speakButton");
+let chatButton = document.getElementById("chatButton");
+let speakButton = document.getElementById("speakButton");
 let reconnectButton = document.querySelector("#reconnectButton");
 let srcObject;
-
+let agentManager;
 // 4. Define the SDK callbacks functions in this object
 const callbacks = {
   // Link the HTML Video element with the WebRTC Stream Object (Video & Audio tracks)
@@ -105,7 +105,11 @@ const callbacks = {
       if (type == "answer") {
         answers.innerHTML += `${timeDisplay()} - [${msg.role}] : ${
           msg.content
-        } `;
+        }  <button id='${
+          msg.id
+        }_plus' title='agentManager.rate() -> Rate this answer (+)'>+</button> <button id='${
+          msg.id
+        }_minus' title='agentManager.rate() -> Rate this answer (-)'>-</button> <br>`;
 
         document
           .getElementById(`${msg.id}_plus`)
@@ -217,20 +221,36 @@ window.addEventListener("load", () => {
 
 // *** Finally ***
 // 6. Create the 'agentManager' instance with the values created in previous steps
-let agentManager = await sdk.createAgentManager(agentId, {
-  auth,
-  callbacks,
-  streamOptions,
-});
 
-console.log("sdk.createAgentManager()", agentManager);
+const agentfetch = () => {
+  return new Promise((resolve, reject) => {
+    try {
+      let agentManager = sdk.createAgentManager(agentId, {
+        auth,
+        callbacks,
+        streamOptions,
+      });
+      return resolve(agentManager);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 
-// Displaying the Agent's name in the HTML Header
-document.querySelector("#previewName").innerHTML =
-  agentManager.agent.preview_name;
+const test = async () => {
+  agentManager = await agentfetch();
 
-// agentManager.connect() method -> Creating a new WebRTC session and connecting it to the Agent
-console.log("agentManager.connect()");
-agentManager.connect();
+  console.log("sdk.createAgentManager()", agentManager);
+
+  // Displaying the Agent's name in the HTML Header
+  document.querySelector("#previewName").innerHTML =
+    agentManager.agent.preview_name;
+
+  // agentManager.connect() method -> Creating a new WebRTC session and connecting it to the Agent
+  console.log("agentManager.connect()");
+  agentManager.connect();
+};
+
+test();
 
 // Happy Coding!
