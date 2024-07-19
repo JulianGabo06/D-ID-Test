@@ -254,6 +254,7 @@ test();
 // Happy Coding!
 
 var recognizing;
+var recognition;
 
 if (navigator.userAgent.includes("Firefox")) {
   recognition = new SpeechRecognition();
