@@ -3,8 +3,7 @@ import "./style.css";
 // 1. Import the Agents SDK library
 import * as sdk from "@d-id/client-sdk";
 // 2. Paste the `data-agent-id' in the 'agentId' variable
-
-let agentId = "agt_twx-LK32";
+let agentId = "agt_rjulUfHc";
 
 // 3. Paste the 'data-client-key' in the 'auth.clientKey' variable
 let auth = {
